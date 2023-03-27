@@ -7,14 +7,14 @@ public class CalculatorService {
         return prisms.stream().mapToLong(this::calculateTotal).sum();
     }
 
-    private long calculateTotal(RectangularPrismBo prismBo) {
+    long calculateTotal(RectangularPrismBo prismBo) {
         return 2 * prismBo.getLength() * prismBo.getWidth()
                 + 2 * prismBo.getWidth() * prismBo.getHeight()
                 + 2 * prismBo.getHeight() * prismBo.getLength()
                 + calculateExtra(prismBo.getHeight(), prismBo.getLength(), prismBo.getWidth());
     }
 
-    private long calculateExtra(int height, int length, int width) {
+    long calculateExtra(int height, int length, int width) {
         int smallestA;
         int smallestB;
         int largest = height;
@@ -39,7 +39,7 @@ public class CalculatorService {
     public List<RectangularPrismBo> findCubicOrdered(List<RectangularPrismBo> prisms) {
         return prisms.stream()
                 .filter(prismBo -> (prismBo.getLength() == prismBo.getWidth()) && (prismBo.getWidth() == prismBo.getHeight()))
-                .sorted(Collections.reverseOrder(Comparator.comparingInt(o -> o.getWidth() + o.getLength() + o.getHeight())))
+                .sorted(Collections.reverseOrder(Comparator.comparingInt(RectangularPrismBo::getWidth)))
                 .collect(Collectors.toList());
     }
 
